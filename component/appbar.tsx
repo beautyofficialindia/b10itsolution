@@ -65,7 +65,7 @@ export default function Page() {
                 </motion.div>
 
                 <div>
-                    <Link href="/contact">
+                    <Link href="/getintouch">
                     <button className="px-6 py-2 text-center font-medium transition duration-150 active:scale-[0.98] text-white bg-[#6c63fa] rounded-xl cursor-pointer">
                         Get in touch
                     </button>
