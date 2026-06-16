@@ -27,7 +27,7 @@ export default function Portfolio() {
                 "bg-size-[10px_10px]"
             )}
         >
-            {/* Optional fade effect */}
+            {/*fade effect */}
             <div className="absolute inset-0 bg-linear-to-b from-white/70 via-transparent to-white/70 pointer-events-none" />
 
             <div className="relative z-10 mx-auto flex max-w-4xl flex-col items-center text-center">

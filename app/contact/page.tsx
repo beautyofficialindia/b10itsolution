@@ -3,14 +3,23 @@ import Footer from "@/component/footer";
 import { Group } from "@/component/Utility/Group";
 import { Input } from "@/component/Utility/Input";
 import { Label } from "@/component/Utility/Label";
+import Image from "next/image";
 
 
 export default function Page() {
     return (<>
         <Appbar />
-        <div className='w-full min-h-screen flex items-center justify-center bg-gray-50re  p-6'>
+        <div className='w-full min-h-screen flex items-center justify-center p-6'>
+            <Image
+                src="/background.png"
+                alt="background_image"
+                fill
+                priority
+                className="mt-30 absolute inset-0 w-full h-full object-cover mask-radial-from-50% mask-b-from-10% mask-t-from-90% select-none pointer-events-none"
+            />
+            <div className="absolute inset-0 mt-24 bg-[radial-gradient(#ececec_1px,transparent_1px)] bg-size-[14px_14px] opacity-70" />
 
-            <div className='w-full max-w-2xl bg-white rounded-xl shadow-lg border border-gray-200 p-8 mt-20'>
+            <div className='w-full max-w-2xl bg-white rounded-xl shadow-lg border border-gray-200 p-8 mt-20 z-20'>
 
                 <div className='mb-5'>
                     <h2 className='text-2xl font-bold text-gray-800 font-prata'>Contact Us</h2>

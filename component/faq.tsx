@@ -3,6 +3,8 @@
 import { useState } from "react";
 import { ChevronDown } from "lucide-react";
 import { cn } from "@/lib/utils";
+import Image from "next/image";
+
 
 const faqs = [
     {
@@ -28,7 +30,7 @@ const faqs = [
     {
         question: "Which technologies do you use?",
         answer:
-            "We specialize in Next.js, React, Node.js, TypeScript, Tailwind CSS, Prisma, PostgreSQL, and modern cloud deployment platforms.",
+            "We specialize in Next.js, React, Node.js, Php, Laravel, Java, Springboot, TypeScript, Tailwind CSS, Prisma, PostgreSQL, and modern cloud deployment platforms.",
     },
 ];
 
@@ -36,9 +38,16 @@ export default function FAQSection() {
     const [active, setActive] = useState<number | null>(0);
 
     return (
-        <section className="relative overflow-hidden rounded-2xl bg-white py-24">
+        <section className="relative overflow-hidden rounded-2xl bg-white py-24 mask-radial-from-50%  mask-t-from-90%">
             {/* Background Pattern */}
-            <div className="absolute inset-0 bg-[radial-gradient(#ececec_1px,transparent_1px)] bg-size-[14px_14px] opacity-70" />
+            <div className="absolute inset-0 bg-[radial-gradient(#ececec_1px,transparent_1px)] bg-size-[14px_14px] opacity-70 " />
+            <Image
+                src="/background.png"
+                alt="background_image"
+                fill
+                priority
+                className="absolute inset-0 w-full h-full object-cover mask-radial-from-50% mask-b-from-10% mask-t-from-90% select-none pointer-events-none"
+            />
 
             <div className="relative mx-auto max-w-4xl px-6">
                 <div className="text-center">

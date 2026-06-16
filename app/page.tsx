@@ -1,4 +1,5 @@
 import AnimatedProgrammingSVG from "@/component/AnimatedProgrammingSVG";
+import { RxRocket } from "react-icons/rx";
 import Appbar from "@/component/appbar";
 import FAQSection from "@/component/faq";
 import Footer from "@/component/footer";
@@ -32,9 +33,9 @@ export default function Home() {
             </h2>
             <div className="flex flex-row justify-center md:justify-start gap-6 mt-10">
               <Link href="/getintouch">
-                <button className="px-8 py-3 text-center font-open-sans font-medium transition duration-150 active:scale-[0.98] hover:bg-[#392cfa] text-white bg-[#6c63fa] rounded-xl cursor-pointer">
-                  Get in touch
-                </button>
+                  <button className=" flex flex-row gap-2 px-8 py-3 text-center text-lg font-open-sans font-medium transition duration-150 active:scale-[0.98] hover:bg-[#392cfa] text-white bg-[#6c63fa] rounded-xl cursor-pointer">
+                     <RxRocket className="size-5 mt-1" /> Get in touch
+                  </button>
               </Link>
               <Link href="/about">
                 <button className="px-8 py-3 text-center font-open-sans font-medium transition duration-150 active:scale-[0.98] text-neutral-800 border border-neutral-300 rounded-xl cursor-pointer">
@@ -53,11 +54,10 @@ export default function Home() {
         </div>
       </main >
 
-      <section className="relative h-screen w-full overflow-hidden [--pattern:var(--color-neutral-300)]  -mt-25 border-y border-(--pattern)">
+      <section className="relative h-screen w-full overflow-hidden [--pattern:var(--color-neutral-100)]  -mt-25 border-y border-(--pattern) ">
         <Portfolio />
       </section>
-      <section className="relative my-20">
-
+      <section className="relative my-2">
         <div className="mx-auto w-full max-w-5xl px-4 py-5">
           <div className="mb-10">
             <h1 className="text-5xl text-center font-bold tracking-tight text-neutral-700">Everything Required to <span className="text-[#6c63fa]">Succeed Online.</span></h1>
@@ -67,18 +67,16 @@ export default function Home() {
         <Services />
       </section>
 
-      <section className="relative max-w-7xl mx-auto w-full">
-        <div className="">
-          <Testonomial />
-        </div>
+      <section className="relative w-full overflow-hidden">
+        <Testonomial />
       </section>
-      <section className="relative max-w-7xl mx-auto w-full">
+      <section className="relative w-full overflow-hidden">
         <div className="mb-5">
           <FAQSection />
         </div>
       </section>
 
-      <footer className="relative max-w-7xl mx-auto w-full">
+      <footer className="relative w-full overflow-hidden">
         <Footer />
       </footer>
     </>

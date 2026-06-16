@@ -10,7 +10,7 @@ export function Testonomial() {
         { text: "our" },
         {
             text: "client's",
-            className: "text-[#6c63fa]",
+            className: "text-[#4136db]",
         },
         { text: "say" },
     ];
@@ -18,49 +18,56 @@ export function Testonomial() {
     const reviews = [
         {
             id: 1,
-            clientImage: "/dummy.jpg",
-            name: "John Carter",
-            role: "CEO • InnovateX",
+            clientImage: "/client1.png",
+            name: "Bijay Prakash",
+            role: "InnovateX",
             review:
                 "Working with the team was effortless. They delivered exactly what we envisioned and exceeded expectations.",
         },
         {
             id: 2,
-            clientImage: "/dummy.jpg",
-            name: "Sarah Wilson",
+            clientImage: "/client2.png",
+            name: "Harshit",
             role: "Founder • Designly",
             review:
                 "Professional communication, clean code, and an outstanding final product. Highly recommended.",
         },
         {
             id: 3,
-            clientImage: "/dummy.jpg",
-            name: "Michael Lee",
-            role: "CTO • StartupHub",
+            clientImage: "/client3.png",
+            name: "Prit",
+            role: "Portfolio development",
             review:
                 "Fast delivery, excellent support, and a product that helped us launch ahead of schedule.",
         },
     ];
 
     return (
-        <section className="relative overflow-hidden rounded-2xl bg-white py-24">
+        <section className="relative w-full overflow-hidden py-24">
+            <Image
+                src="/testinomial_image.jpeg"
+                alt="background_image"
+                fill
+                priority
+                className="absolute inset-0 w-full h-full object-cover mask-radial-from-50% mask-b-from-10% mask-t-from-90% select-none pointer-events-none"
+            />
             {/* Background Pattern */}
-            <div className="absolute inset-0 bg-[radial-gradient(#ececec_1px,transparent_1px)] bg-size-[14px_14px] opacity-70" />
+            {/* <div className="absolute inset-0 bg-[radial-gradient(#ececec_1px,transparent_1px)] bg-size-[14px_14px] opacity-70" /> */}
 
             <div className="relative mx-auto max-w-7xl px-6">
                 <div className="text-center">
                     <div className="hidden justify-center md:flex">
                         <TypewriterEffectSmooth
                             words={words}
-                            cursorClassName="bg-[#6c63fa]"
+                            cursorClassName="bg-[#4136db]"
                         />
                     </div>
 
                     <h2 className="block text-4xl font-bold text-neutral-900 md:hidden">
-                        What our <span className="text-[#6c63fa]">client&apos;s</span> say
+                        What our <span className="text-[#4136db]">client&apos;s</span> say
                     </h2>
 
-                    <p className="mx-auto mt-4 max-w-2xl text-lg text-neutral-600">
+                    <p className="mx-auto mt-4 max-w-2xl text-lg text-shadow-neutral-600">
                         Trusted by startups and growing businesses to build scalable,
                         beautiful, and high-performing digital products.
                     </p>
@@ -70,7 +77,7 @@ export function Testonomial() {
                     {reviews.map((review) => (
                         <div
                             key={review.id}
-                            className="group rounded-2xl border border-neutral-200 bg-white p-8 shadow-sm transition-all duration-300 hover:-translate-y-2 hover:border-[#6c63fa]/30 hover:shadow-xl"
+                            className="group rounded-2xl border border-neutral-200 bg-white p-8 shadow-sm transition-all duration-300 hover:-translate-y-2 hover:shadow-xl"
                         >
                             <Quote className="mb-6 h-8 w-8 text-[#6c63fa]" />
 
