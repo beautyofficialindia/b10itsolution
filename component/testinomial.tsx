@@ -2,112 +2,75 @@
 
 import Image from "next/image";
 import { Quote } from "lucide-react";
-import { TypewriterEffectSmooth } from "./typewriter-effect";
+
 
 export function Testonomial() {
-    const words = [
-        { text: "What" },
-        { text: "our" },
-        {
-            text: "client's",
-            className: "text-[#4136db]",
-        },
-        { text: "say" },
-    ];
 
-    const reviews = [
+
+    const testimonials = [
         {
-            id: 1,
-            clientImage: "/client1.png",
+            quote: "Working with the team was effortless. They delivered exactly what we envisioned and exceeded expectations.",
             name: "Bijay Prakash",
             role: "InnovateX",
-            review:
-                "Working with the team was effortless. They delivered exactly what we envisioned and exceeded expectations.",
+            image: "/client1.png" // Replace with actual paths
         },
         {
-            id: 2,
-            clientImage: "/client2.png",
+            quote: "Professional communication, clean code, and an outstanding final product. Highly recommended.",
             name: "Harshit",
             role: "Founder • Designly",
-            review:
-                "Professional communication, clean code, and an outstanding final product. Highly recommended.",
+            image: "/client2.png"
         },
         {
-            id: 3,
-            clientImage: "/client3.png",
+            quote: "Fast delivery, excellent support, and a product that helped us launch ahead of schedule.",
             name: "Prit",
             role: "Portfolio development",
-            review:
-                "Fast delivery, excellent support, and a product that helped us launch ahead of schedule.",
-        },
+            image: "/client3.png"
+        }
     ];
 
     return (
-        <section className="relative w-full overflow-hidden py-24">
-            <Image
-                src="/testinomial_image.jpeg"
-                alt="background_image"
-                fill
-                priority
-                className="absolute inset-0 w-full h-full object-cover mask-radial-from-50% mask-b-from-10% mask-t-from-90% select-none pointer-events-none"
-            />
-            {/* Background Pattern */}
-            {/* <div className="absolute inset-0 bg-[radial-gradient(#ececec_1px,transparent_1px)] bg-size-[14px_14px] opacity-70" /> */}
+        <div className="w-full">
+            {/* Static, confident headline using Prata for that editorial feel */}
+            <div className="text-center mb-16 md:mb-24">
+                <h2 className="text-4xl md:text-5xl font-medium font-prata tracking-tight text-white mb-6">
+                    What our clients say
+                </h2>
+                <p className="text-lg text-zinc-400 font-light max-w-2xl mx-auto">
+                    Trusted by startups and growing businesses to build scalable, beautiful, and high-performing digital products.
+                </p>
+            </div>
 
-            <div className="relative mx-auto max-w-7xl px-6">
-                <div className="text-center">
-                    <div className="hidden justify-center md:flex">
-                        <TypewriterEffectSmooth
-                            words={words}
-                            cursorClassName="bg-[#4136db]"
-                        />
-                    </div>
-
-                    <h2 className="block text-4xl font-bold text-neutral-900 md:hidden">
-                        What our <span className="text-[#4136db]">client&apos;s</span> say
-                    </h2>
-
-                    <p className="mx-auto mt-4 max-w-2xl text-lg text-shadow-neutral-600">
-                        Trusted by startups and growing businesses to build scalable,
-                        beautiful, and high-performing digital products.
-                    </p>
-                </div>
-
-                <div className="mt-16 grid gap-6 md:grid-cols-3">
-                    {reviews.map((review) => (
-                        <div
-                            key={review.id}
-                            className="group rounded-2xl border border-neutral-200 bg-white p-8 shadow-sm transition-all duration-300 hover:-translate-y-2 hover:shadow-xl"
-                        >
-                            <Quote className="mb-6 h-8 w-8 text-[#6c63fa]" />
-
-                            <p className="leading-7 text-neutral-600">
-                                &quot;{review.review}&quot;
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+                {testimonials.map((testimonial, index) => (
+                    <div
+                        key={index}
+                        // Premium dark-mode card styling: subtle zinc background, faint border, softer text
+                        className="flex flex-col justify-between p-10 rounded-2xl bg-zinc-900/50 border border-zinc-800 backdrop-blur-sm transition-colors hover:bg-zinc-900"
+                    >
+                        <div>
+                            <span className="text-5xl font-serif text-blue-600 opacity-50 leading-none"> <Quote/></span>
+                            <p className="mt-4 text-zinc-300 font-light leading-relaxed">
+                                {testimonial.quote}
                             </p>
+                        </div>
 
-                            <div className="mt-8 flex items-center gap-4">
+                        <div className="flex items-center gap-4 mt-8 pt-8 border-t border-zinc-800">
+                            <div className="relative w-12 h-12 rounded-full overflow-hidden bg-zinc-800">
                                 <Image
-                                    src={review.clientImage}
-                                    alt={review.name}
-                                    width={56}
-                                    height={56}
-                                    className="rounded-full border border-neutral-200 object-cover"
+                                    src={testimonial.image}
+                                    alt={testimonial.name}
+                                    fill
+                                    className="object-cover grayscale opacity-80" // Grayscale images add an editorial, cohesive look
                                 />
-
-                                <div>
-                                    <h3 className="font-semibold text-neutral-900">
-                                        {review.name}
-                                    </h3>
-
-                                    <p className="text-sm text-neutral-500">
-                                        {review.role}
-                                    </p>
-                                </div>
+                            </div>
+                            <div>
+                                <h4 className="text-white font-medium text-sm">{testimonial.name}</h4>
+                                <p className="text-zinc-500 text-sm font-light">{testimonial.role}</p>
                             </div>
                         </div>
-                    ))}
-                </div>
+                    </div>
+                ))}
             </div>
-        </section>
+        </div>
     );
 }

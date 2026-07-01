@@ -5,7 +5,6 @@ import { ChevronDown } from "lucide-react";
 import { cn } from "@/lib/utils";
 import Image from "next/image";
 
-
 const faqs = [
     {
         question: "How long does it take to complete a project?",
@@ -38,7 +37,7 @@ export default function FAQSection() {
     const [active, setActive] = useState<number | null>(0);
 
     return (
-        <section className="relative overflow-hidden rounded-2xl bg-white py-24 mask-radial-from-50%  mask-t-from-90%">
+        <section className="relative overflow-hidden rounded-2xl bg-white py-24">
             {/* Background Pattern */}
             <div className="absolute inset-0 bg-[radial-gradient(#ececec_1px,transparent_1px)] bg-size-[14px_14px] opacity-70 " />
             <Image
@@ -52,8 +51,8 @@ export default function FAQSection() {
             <div className="relative mx-auto max-w-4xl px-6">
                 <div className="text-center">
 
-                    <h2 className="text-4xl font-bold">
-                        Frequently <span className="text-[#6c63fa]">Asked</span> Questions
+                    <h2 className="text-4xl md:text-5xl font-medium font-prata tracking-tight text-zinc-950">
+                        Frequently <span className="text-blue-600 italic">Asked</span> Questions
                     </h2>
 
                     <p className="mx-auto mt-4 max-w-2xl text-lg text-neutral-600">

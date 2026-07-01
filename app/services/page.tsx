@@ -6,7 +6,7 @@ import { motion } from "motion/react";
 import Image from "next/image";
 
 export default function Page() {
-    
+
     return (
         <>
             <Appbar />
@@ -18,32 +18,35 @@ export default function Page() {
                         backgroundSize: '48px 48px'
                     }}
                 />
-                <section className="max-w-7xl mx-auto px-4 ">
-                    <div className="max-w-5xl mx-auto w-full mt-32 flex flex-col items-center">
-                        <div className="mb-10 text-center selection:bg-amber-200 selection:text-amber-900">
-                            <h1 className="text-5xl md:text-6xl lg:text-7xl text-center tracking-tight text-neutral-900 font-semibold flex flex-wrap items-center justify-center gap-3 md:gap-4 overflow-hidden py-2">
+                <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                    <div className="max-w-5xl mx-auto w-full mt-16 sm:mt-24 lg:mt-32 flex flex-col items-center">
+
+                        <div className="mb-6 md:mb-10 w-full text-center selection:bg-amber-200 selection:text-amber-900">
+
+                            <h1 className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl text-center tracking-tight text-neutral-900 font-semibold flex flex-wrap items-center justify-center gap-2 sm:gap-3 md:gap-4 overflow-hidden py-2">
                                 B10 IT Solution <span className="font-open-sans font-bold text-[#6c63fa]">Services</span>
+
                                 <motion.svg
                                     initial={{ opacity: 0, scale: 0, rotate: -45 }}
                                     animate={{ opacity: 1, scale: 1, rotate: 0 }}
                                     transition={{ duration: 0.5, delay: 0.7, type: "spring" }}
                                     width="32" height="32" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"
-                                    className="text-[#6c63fa] shrink-0 w-6 h-6 md:w-8 md:h-8"
+                                    // SVG scales based on screen size so it doesn't look too massive on mobile
+                                    className="text-[#6c63fa] shrink-0 w-6 h-6 sm:w-8 sm:h-8 lg:w-10 lg:h-10"
                                 >
                                     <path d="M12 2L14.5 9.5L22 12L14.5 14.5L12 22L9.5 14.5L2 12L9.5 9.5L12 2Z" fill="currentColor" />
                                     <path d="M20 18L21 21L24 22L21 23L20 26L19 23L16 22L19 21L20 18Z" fill="currentColor" />
                                 </motion.svg>
                             </h1>
 
-                            
-                            <p className="mx-auto max-w-2xl text-center text-lg md:text-xl text-neutral-500 mt-2 font-open-sans"
-                            >
-                                Discover how B10 IT  services and solutions can help your enterprise turn digital challenges into business success.
+                            <p className="mx-auto max-w-2xl px-2 sm:px-0 text-center text-base sm:text-lg md:text-xl text-neutral-500 mt-3 md:mt-4 font-open-sans">
+                                Discover how B10 IT services and solutions can help your enterprise turn digital challenges into business success.
                             </p>
-                            <div className="mt-5">
-                                <Marquee/>
+               
+                            <div className="mt-6 md:mt-8 w-full max-w-4xl mx-auto overflow-hidden">
+                                <Marquee />
                             </div>
-                            
+
                         </div>
                     </div>
                 </section>
@@ -106,10 +109,10 @@ export default function Page() {
 
                             <div className="flex flex-col justify-center order-3 lg:order-4">
                                 <h2 className="font-prata font-bold text-3xl md:text-4xl text-neutral-900 mb-6">
-                                   Mobile App Development
+                                    Mobile App Development
                                 </h2>
                                 <p className="font-open-sans text-neutral-700 text-lg leading-relaxed">
-                                    Your vision, in the palm of their hand. We craft intuitive, high-performance iOS and Android experiences that blend seamless 
+                                    Your vision, in the palm of their hand. We craft intuitive, high-performance iOS and Android experiences that blend seamless
                                     functionality with world-class interface design. Our mobile ecosystems are built to engage users and scale effortlessly as your audience grows.
                                 </p>
                             </div>
@@ -132,10 +135,7 @@ export default function Page() {
                                 />
                                 <div className="absolute inset-0 bg-linear-to-t from-neutral-100/60 to-transparent"></div>
                             </div>
-
                         </div>
-
-
                     </div>
                 </section>
             </main>

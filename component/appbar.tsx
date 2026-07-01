@@ -1,7 +1,7 @@
 "use client"
 import Link from "next/link";
 import Image from "next/image";
-import { AnimatePresence, motion } from "framer-motion";
+import { AnimatePresence, motion, useMotionValueEvent, useScroll } from "framer-motion";
 import { useState } from "react";
 import { Menu, X } from "lucide-react";
 import { useRouter } from "next/navigation";
@@ -15,7 +15,7 @@ export default function Page() {
         },
         {
             title: 'Contact us',
-            href: "/contact"
+            href: "/getintouch"
         },
         {
             title: 'Services',
@@ -23,14 +23,38 @@ export default function Page() {
         }
     ]
     const [hovered, setHovered] = useState<number | null>(null);
+    const [scroll, setScrolled] = useState<boolean>(false);
     const router = useRouter();
     const handleNavigation = (path: string) => {
         router.push(path);
         setIsOpen(false);
     };
+
+    const { scrollY } = useScroll();
+
+    useMotionValueEvent(scrollY, "change", (latest) => {
+        if (latest > 20) {
+            setScrolled(true)
+        } else {
+            setScrolled(false)
+        }
+    })
+
     return (
         <>
-            <nav className="hidden fixed inset-x-0 top-0 z-50 mx-auto max-w-7xl md:flex items-center justify-between  px-4 py-2 p-2 mt-2 bg-white rounded-md shadow-md">
+            <motion.nav
+                animate={scroll ? {
+                    width: "95%",
+                    y: 10
+                } : {
+                    width: "100%",
+                    y: 0
+                }}
+                transition={{
+                    duration: 0.3,
+                    ease: "linear"
+                }}
+                className="hidden fixed inset-x-0 top-0 z-50 mx-auto max-w-full md:flex items-center justify-between  px-4 py-2 p-2 mt-2 bg-white rounded-md shadow-md">
                 <div className="font-bold">
                     <Link href="/" className="block">
                         <Image
@@ -66,13 +90,13 @@ export default function Page() {
 
                 <div>
                     <Link href="/getintouch">
-                    <button className="px-6 py-2 text-center font-medium transition duration-150 active:scale-[0.98] text-white bg-[#6c63fa] rounded-xl cursor-pointer">
-                        Get in touch
-                    </button>
+                        <button className="px-6 py-2 text-center font-medium transition duration-150 active:scale-[0.98] text-white bg-[#6c63fa] rounded-xl cursor-pointer">
+                            Get in touch
+                        </button>
                     </Link>
                 </div>
 
-            </nav>
+            </motion.nav>
 
             {/* --- MOBILE NAVIGATION --- */}
             <div>
