@@ -15,7 +15,7 @@ export default function Page() {
         },
         {
             title: 'Contact us',
-            href: "/getintouch"
+            href: "/contact"
         },
         {
             title: 'Services',

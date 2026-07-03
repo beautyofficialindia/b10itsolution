@@ -57,18 +57,22 @@ export default function Home() {
       <section className="relative h-screen w-full overflow-hidden [--pattern:var(--color-neutral-100)]  -mt-25 border-y border-(--pattern) ">
         <Portfolio />
       </section>
-      <section className="relative z-10 w-full py-24 md:py-32 bg-white">
-        <div className="max-w-7xl mx-auto px-6">
-          <div className="max-w-3xl mb-16 md:mb-24">
-            <h2 className="text-4xl md:text-5xl font-medium tracking-tighter text-zinc-950">
-              Everything required to <br className="hidden md:block" />
-              <span className="text-zinc-500">succeed online.</span>
+      <section className="relative z-10 w-full bg-white py-24 md:py-32">
+        <div className="mx-auto flex max-w-7xl flex-col items-center px-6">
+          <div className="mb-16 max-w-4xl text-center">
+            <h2 className="text-3xl font-bold tracking-tight text-neutral-800 md:text-5xl">
+              Everything required to succeed online
             </h2>
-            <p className="mt-6 text-lg text-zinc-500 font-light leading-relaxed max-w-xl">
-              End-to-end design and development services tailored to build, launch, and scale your digital products with precision.
+
+            <p className="mx-auto mt-6 max-w-2xl text-lg font-light leading-relaxed text-zinc-500">
+              End-to-end design and development services tailored to design,
+              build, launch, and scale your digital products with precision.
             </p>
           </div>
-          <Services />
+
+          <div className="w-full">
+            <Services />
+          </div>
         </div>
       </section>
 
