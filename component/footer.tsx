@@ -106,7 +106,7 @@ export default function Footer() {
                             beautyofficialindia@gmail.com
                         </a>
                         <span className="text-zinc-300">|</span>
-                        <Link href="#" className="hover:text-zinc-500 transition-colors duration-200">
+                        <Link href="/policy" className="hover:text-zinc-500 transition-colors duration-200">
                             Privacy Policy
                         </Link>
                     </div>

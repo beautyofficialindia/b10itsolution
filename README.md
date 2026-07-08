@@ -1,36 +1,58 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# B10 IT Solution - Corporate Website
 
-## Getting Started
+Welcome to the official repository for the **B10 IT Solution** website. This project serves as the primary digital front door for our software development and IT consultancy services, designed with a modern, minimalist, and ultra-futuristic aesthetic.
 
-First, run the development server:
+## 🚀 Tech Stack
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
+This project is built using modern web development technologies to ensure high performance, SEO optimization, and a seamless developer experience:
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+*   **Framework:** [Next.js](https://nextjs.org/) (React)
+*   **Styling:** [Tailwind CSS](https://tailwindcss.com/)
+*   **UI Components:** Custom glassmorphism and bento grid layouts
+*   **Icons:** [Lucide React / Heroicons] *(Update based on your package)*
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+## ✨ Key Features
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+*   **Responsive Design:** Fully responsive across all devices (Mobile, Tablet, Desktop).
+*   **Optimized Performance:** Fast load times utilizing Next.js Server-Side Rendering (SSR) and Static Site Generation (SSG).
+*   **Clean Architecture:** Component-driven architecture ensuring reusability and maintainability.
 
-## Learn More
+## 🛠️ Getting Started
 
-To learn more about Next.js, take a look at the following resources:
+Follow these steps to set up the project locally on your machine.
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+### Prerequisites
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+Ensure you have the following installed:
+*   [Node.js](https://nodejs.org/) (v18.0 or higher recommended)
+*   npm, yarn, or pnpm
 
-## Deploy on Vercel
+### Installation
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+1.  **Clone the repository:**
+    ```bash
+    git clone [https://github.com/your-username/b10-it-solution.git](https://github.com/your-username/b10-it-solution.git)
+    cd b10-it-solution
+    ```
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+2.  **Install dependencies:**
+    ```bash
+    npm install
+    # or
+    yarn install
+    # or
+    pnpm install
+    ```
+
+3.  **Run the development server:**
+    ```bash
+    npm run dev
+    # or
+    yarn dev
+    # or
+    pnpm dev
+    ```
+
+4.  **Open your browser:**
+    Navigate to [http://localhost:3000](http://localhost:3000) to view the application.
+
