@@ -18,7 +18,7 @@ export default function Home() {
         alt="background_image"
         fill
         priority
-        sizes="(max-width: 768px) 100vw, 100vw" // Optimization: Hinting image sizes
+        sizes="(max-width: 768px) 100vw, 100vw" 
         className="absolute inset-0 w-full h-full object-cover mask-radial-from-50% mask-b-from-10% mask-t-from-90% select-none pointer-events-none"
       />
 
@@ -27,7 +27,6 @@ export default function Home() {
         <div className="flex flex-col gap-8 md:gap-10 px-0 sm:px-4 md:px-8 lg:grid lg:grid-cols-2 lg:gap-20">
           <div className="relative z-10 flex flex-col items-center md:items-start lg:-mr-12">
 
-            {/* UX: Scaled down base text to 5xl for mobile to prevent awkward word wrapping, maintained md:text-7xl */}
             <h1 className="max-w-3xl text-5xl sm:text-6xl md:text-7xl font-medium text-center md:text-left text-neutral-900 font-prata leading-tight md:leading-none selection:bg-amber-200 selection:text-amber-900">
               Build digital products that <span className="text-[#6c63fa] italic font-serif">scale.</span>
             </h1>
@@ -36,7 +35,6 @@ export default function Home() {
               We transform complex business problems into fast, reliable, and beautifully designed software across web, mobile, and cloud.
             </p>
 
-            {/* UX: Stacked buttons on mobile (flex-col) for better thumb-reach and larger touch targets. Resumes row on sm/md */}
             <div className="flex flex-col sm:flex-row w-full sm:w-auto justify-center md:justify-start gap-4 md:gap-6 mt-8 md:mt-10">
               <Link href="/getintouch" className="w-full sm:w-auto">
                 <button className="group flex w-full sm:w-auto items-center justify-center gap-3 px-8 py-4 text-base md:text-sm font-medium tracking-wide text-white bg-[#665cf3] rounded-xl transition-all duration-300 hover:bg-[#1201ff] hover:scale-[1.02] active:scale-[0.98]">
@@ -51,7 +49,6 @@ export default function Home() {
             </div>
           </div>
 
-          {/* Unchanged large screen asset */}
           <div className="hidden relative md:flex md:justify-center mt-20 lg:justify-center">
             <div className="w-full ml-5 max-w-162.5 scale-100 lg:scale-110">
               <AnimatedProgrammingSVG />
@@ -60,16 +57,13 @@ export default function Home() {
         </div>
       </main>
 
-      {/* Adjusted spacing to prevent overlapping boundaries on small devices */}
       <section className="relative min-h-screen w-full overflow-hidden [--pattern:var(--color-neutral-100)] -mt-10 md:-mt-25 border-y border-(--pattern)">
         <Portfolio />
       </section>
 
-      {/* Reduced vertical padding on mobile for faster scrolling between sections */}
       <section className="relative z-10 w-full bg-white py-16 md:py-32">
         <div className="mx-auto flex max-w-7xl flex-col items-center px-6">
           <div className="mb-12 md:mb-16 max-w-4xl text-center">
-            {/* UX: Fluid typography scaling */}
             <h2 className="text-3xl font-bold tracking-tight text-neutral-800 sm:text-4xl md:text-5xl">
               Everything required to succeed online
             </h2>

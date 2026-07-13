@@ -25,7 +25,7 @@ export default function Footer() {
                                 alt="B10IT Solution Logo"
                                 width={140}
                                 height={54}
-                                className="object-contain"
+                                className="object-contain h-auto"
                             />
                         </Link>
                         <p className="mt-8 text-lg text-zinc-200 font-light leading-relaxed max-w-sm">

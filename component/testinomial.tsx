@@ -60,6 +60,7 @@ export function Testonomial() {
                                     src={testimonial.image}
                                     alt={testimonial.name}
                                     fill
+                                    sizes="64px"
                                     className="object-cover grayscale opacity-80" // Grayscale images add an editorial, cohesive look
                                 />
                             </div>

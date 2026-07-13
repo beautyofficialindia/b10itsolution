@@ -3,16 +3,16 @@ import { cn } from "@/lib/utils";
 import { motion } from "motion/react";
 import Image from "next/image";
 
-export default function MacbookIllustration({className}:{className?: string}) {
+export default function MacbookIllustration({ className }: { className?: string }) {
     return (
-        <motion.div whileHover="animate" initial="initial" className={cn("max-w-2xl mx-auto w-full h-96",className)}>
+        <motion.div whileHover="animate" initial="initial" className={cn("max-w-2xl mx-auto w-full h-96", className)}>
             {/* lid area */}
             <div className="w-60 mx-auto perspective-distant">
                 <motion.div
                     variants={{
                         initial: {
                             rotateX: -60,
-                            opacity:50
+                            opacity: 50
                         },
                         animate: {
                             rotateX: 20,
@@ -31,10 +31,10 @@ export default function MacbookIllustration({className}:{className?: string}) {
 
                         <Image
                             src="/macbookillustration.png"
-                            alt="device screen"
-                            loading="eager"
+                            alt="MacBook Illustration"
                             fill
-                            className="object-cover"
+                            sizes="(max-width: 768px) 100vw, (max-width: 1200px) 75vw, 50vw"
+                            className="object-cover" 
                         />
                     </div>
                 </motion.div>
