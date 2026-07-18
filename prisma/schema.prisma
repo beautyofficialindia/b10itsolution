@@ -13,10 +13,16 @@ datasource db {
 }
 
 model ContactRequest {
-  id        Int      @id @default(autoincrement())
+  id        String   @id @default(cuid())
   name      String
   email     String
-  number    String?  
+  number    String
   message   String
-  createdAt DateTime @default(now()) 
+  
+  // New fields for database file storage
+  fileName  String?
+  fileType  String?
+  fileData  Bytes?   
+  
+  createdAt DateTime @default(now())
 }

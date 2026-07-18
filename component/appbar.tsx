@@ -7,7 +7,10 @@ import { Menu, X } from "lucide-react";
 import { useRouter } from "next/navigation";
 
 export default function Page() {
+    const [hovered, setHovered] = useState<number | null>(null);
+    const [scroll, setScrolled] = useState<boolean>(false);
     const [isOpen, setIsOpen] = useState<boolean>(false);
+
     const navItems = [
         {
             title: 'About us',
@@ -22,8 +25,7 @@ export default function Page() {
             href: "/services"
         }
     ]
-    const [hovered, setHovered] = useState<number | null>(null);
-    const [scroll, setScrolled] = useState<boolean>(false);
+
     const router = useRouter();
     const handleNavigation = (path: string) => {
         router.push(path);
@@ -54,7 +56,7 @@ export default function Page() {
                     duration: 0.3,
                     ease: "linear"
                 }}
-                className="hidden fixed inset-x-0 top-0 z-50 mx-auto max-w-full md:flex items-center justify-between  px-4 py-2 p-2 mt-2 bg-white rounded-md shadow-md">
+                className="hidden fixed inset-x-0 top-0 z-50 mx-auto max-w-full md:flex items-center justify-between px-4 py-2 p-2 mt-2 bg-white rounded-md shadow-md">
                 <div className="font-bold">
                     <Link href="/" className="block">
                         <Image
@@ -100,11 +102,11 @@ export default function Page() {
 
             {/* --- MOBILE NAVIGATION --- */}
             <div>
-                <div className="md:hidden fixed inset-x-0 top-0 z-50 px-4 py-3 bg-white/90 backdrop-blur-md flex items-center justify-between shadow-sm">
+                <div className="md:hidden fixed inset-x-0 top-0 z-60 px-4 py-3 bg-white/90 backdrop-blur-md flex items-center justify-between shadow-sm">
                     <Link href="/">
                         <Image src="/Logo.png" height={40} width={100} alt="logo" className="h-8 w-auto" />
                     </Link>
-                    <button onClick={() => setIsOpen(!isOpen)} className="text-black p-1">
+                    <button onClick={() => setIsOpen(!isOpen)} className="text-black">
                         {isOpen ? <X size={28} /> : <Menu size={28} />}
                     </button>
                 </div>
@@ -116,19 +118,28 @@ export default function Page() {
                             initial={{ opacity: 0, y: -20 }}
                             animate={{ opacity: 1, y: 0 }}
                             exit={{ opacity: 0, y: -20 }}
-                            className="md:hidden fixed inset-x-0 top-0 z-50 mx-auto flex items-center justify-between rounded-xl bg-white/90 backdrop-blur-md px-4 py-3 mt-2 ml-2 mr-2 shadow-sm"
+                            className="md:hidden fixed inset-x-0 top-17.5 z-50 mx-4 flex flex-col rounded-xl bg-white/95 backdrop-blur-md px-6 py-6 shadow-lg border border-neutral-100"
                         >
-                            <ul className="flex flex-col space-y-8">
+                            <ul className="flex flex-col space-y-6">
                                 {navItems.map((item) => (
                                     <li key={item.title}>
                                         <button
                                             onClick={() => handleNavigation(item.href)}
-                                            className="w-full text-left text-3xl font-bold tracking-tight text-neutral-900 border-b border-neutral-100 pb-4"
+                                            className="w-full text-left text-2xl font-bold tracking-tight text-neutral-900 border-b border-neutral-100 pb-4"
                                         >
                                             {item.title}
                                         </button>
                                     </li>
                                 ))}
+
+                                <li>
+                                    <button
+                                        onClick={() => handleNavigation("/getintouch")}
+                                        className="w-full mt-2 px-6 py-3 text-center font-bold text-white bg-linear-to-t from-[#28288d] to-[#4040a1] rounded-xl active:scale-[0.98] transition-transform"
+                                    >
+                                        Get in touch
+                                    </button>
+                                </li>
                             </ul>
                         </motion.div>
                     )}

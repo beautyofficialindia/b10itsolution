@@ -4,8 +4,12 @@ import Footer from "@/component/footer";
 import { Group } from "@/component/Utility/Group";
 import { Input } from "@/component/Utility/Input";
 import { Label } from "@/component/Utility/Label";
-import { useState } from "react";
+import { useRef, useState } from "react";
 import { motion } from "motion/react";
+import { useRouter } from "next/navigation";
+
+//  max file size  (5MB = 5 * 1024 * 1024 bytes)
+const MAX_FILE_SIZE = 5 * 1024 * 1024;
 
 export default function Page() {
     const [name, setName] = useState("");
@@ -14,17 +18,37 @@ export default function Page() {
     const [message, setMessage] = useState("");
     const [isSubmitting, setIsSubmitting] = useState(false);
     const [status, setStatus] = useState({ type: "", message: "" });
+    const [showModal, setShowModal] = useState(false);
+    const [file, setFile] = useState<File | null>(null);
+    const [fileError, setFileError] = useState("");
+
+    const router = useRouter();
+    const fileInputRef = useRef<HTMLInputElement>(null);
+
 
     const handleSubmit = async (e: React.FormEvent) => {
         e.preventDefault();
+
+        // return if any file error happened
+        if (fileError) return;
+
         setIsSubmitting(true);
         setStatus({ type: "", message: "" });
+
+        // Switch to FormData to handle file uploads
+        const formData = new FormData();
+        formData.append("name", name);
+        formData.append("email", email);
+        formData.append("number", number);
+        formData.append("message", message);
+        if (file) {
+            formData.append("file", file);
+        }
 
         try {
             const response = await fetch("/api/contact", {
                 method: "POST",
-                headers: { "Content-Type": "application/json" },
-                body: JSON.stringify({ name, email, number, message }),
+                body: formData,
             });
 
             const data = await response.json();
@@ -33,16 +57,18 @@ export default function Page() {
                 throw new Error(data.error || "Something went wrong.");
             }
 
-            setStatus({ type: "success", message: "Thank you! Your message has been received." });
+
+
+            setShowModal(true); // Trigger the success modal instead of just setting the inline status
             // Reset input values
             setName("");
             setEmail("");
             setNumber("");
             setMessage("");
-
-            setTimeout(() => {
-                setStatus({ type: "", message: "" });
-            }, 5000);
+            setFile(null);
+            if (fileInputRef.current) {
+                fileInputRef.current.value = "";
+            }
 
             // eslint-disable-next-line @typescript-eslint/no-explicit-any
         } catch (err: any) {
@@ -228,6 +254,42 @@ export default function Page() {
                             />
                         </Group>
 
+                        <Group className="flex flex-col gap-2">
+                            <Label className="text-xs sm:text-sm font-semibold text-gray-700">
+                                Attachment (Optional, max 5MB)
+                            </Label>
+                            <input
+                                type="file"
+                                name="file"
+                                ref={fileInputRef}
+                                className={`w-full px-4 py-3 bg-white border ${fileError ? 'border-red-500 focus:ring-red-500/50 focus:border-red-500' : 'border-gray-300 focus:ring-[#28288d]/50 focus:border-[#28288d]'} rounded-xl shadow-sm focus:outline-none focus:ring-2 transition-all text-sm sm:text-base file:mr-4 file:py-2 file:px-4 file:rounded-full file:border-0 file:text-sm file:font-semibold file:bg-[#28288d]/10 file:text-[#28288d] hover:file:bg-[#28288d]/20 cursor-pointer`}
+                                onChange={(e) => {
+                                    setFileError(""); // Reset error on new selection
+
+                                    if (e.target.files && e.target.files[0]) {
+                                        const selectedFile = e.target.files[0];
+
+                                        // Check File Size
+                                        if (selectedFile.size > MAX_FILE_SIZE) {
+                                            setFileError("File is too large. Please select a file smaller than 5MB.");
+                                            setFile(null);
+                                            if (fileInputRef.current) {
+                                                fileInputRef.current.value = ""; // Clear the input
+                                            }
+                                        } else {
+                                            setFile(selectedFile);
+                                        }
+                                    } else {
+                                        setFile(null);
+                                    }
+                                }}
+                            />
+                            {/* Display File Size Error */}
+                            {fileError && (
+                                <p className="text-red-500 text-xs sm:text-sm mt-1">{fileError}</p>
+                            )}
+                        </Group>
+
                         {/* Inline Status Messages */}
                         {status.message && (
                             <div className={`p-4 rounded-xl text-sm font-medium ${status.type === "success" ? "bg-green-50 text-green-800" : "bg-red-50 text-red-800"}`}>
@@ -237,7 +299,11 @@ export default function Page() {
 
                         <button
                             type="submit"
-                            className="mt-2 sm:mt-4 w-full bg-linear-to-t from-[#28288d] to-[#4040a1] text-white font-semibold text-base sm:text-lg py-3 sm:py-4 px-6 rounded-xl shadow-md hover:shadow-lg hover:from-[#212175] hover:to-[#28288d] transition-all duration-200 active:scale-[0.98] cursor-pointer"
+                            disabled={isSubmitting}
+                            className={`mt-2 sm:mt-4 w-full bg-linear-to-t from-[#28288d] to-[#4040a1] text-white font-semibold text-base sm:text-lg py-3 sm:py-4 px-6 rounded-xl shadow-md transition-all duration-200 ${isSubmitting
+                                ? "opacity-70 cursor-not-allowed"
+                                : "hover:shadow-lg hover:from-[#212175] hover:to-[#28288d] active:scale-[0.98] cursor-pointer"
+                                }`}
                         >
                             {isSubmitting ? "Processing..." : "Send Message"}
                         </button>
@@ -247,6 +313,51 @@ export default function Page() {
             </section>
 
             <Footer />
+            {showModal && (
+                <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/40 backdrop-blur-sm px-4">
+                    <motion.div
+                        initial={{ opacity: 0, scale: 0.9 }}
+                        animate={{ opacity: 1, scale: 1 }}
+                        transition={{ duration: 0.3, ease: "easeOut" }}
+                        className="bg-white p-8 sm:p-10 rounded-2xl shadow-2xl max-w-sm w-full flex flex-col items-center text-center"
+                    >
+                        {/* Success Icon */}
+                        <motion.div
+                            initial={{ scale: 0, opacity: 0 }}
+                            animate={{ scale: 1, opacity: 1 }}
+                            transition={{ type: "spring", stiffness: 260, damping: 20, delay: 0.1 }}
+                            className="w-16 h-16 bg-green-100 text-green-600 rounded-full flex items-center justify-center mb-5"
+                        >
+                            <svg className="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                                <motion.path
+                                    initial={{ pathLength: 0 }}
+                                    animate={{ pathLength: 1 }}
+                                    transition={{ duration: 0.5, ease: "easeOut", delay: 0.3 }}
+                                    strokeLinecap="round"
+                                    strokeLinejoin="round"
+                                    strokeWidth="3" /* Increased slightly to 3 for better visual impact */
+                                    d="M5 13l4 4L19 7"
+                                />
+                            </svg>
+                        </motion.div>
+
+                        <h3 className="text-2xl font-bold text-gray-900 mb-2 font-prata">Thank You!</h3>
+                        <p className="text-gray-600 mb-8 font-open-sans">
+                            Your message has been received. We will get back to you shortly.
+                        </p>
+
+                        <button
+                            onClick={() => {
+                                setShowModal(false);
+                                router.push("/"); // Redirect to landing page
+                            }}
+                            className="w-full bg-[#28288d] hover:bg-[#212175] text-white font-semibold py-3 px-6 rounded-xl transition-colors duration-200"
+                        >
+                            Back to Homepage
+                        </button>
+                    </motion.div>
+                </div>
+            )}
         </div>
     )
 }
