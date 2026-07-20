@@ -103,8 +103,15 @@ export default function Page() {
             {/* --- MOBILE NAVIGATION --- */}
             <div>
                 <div className="md:hidden fixed inset-x-0 top-0 z-60 px-4 py-3 bg-white/90 backdrop-blur-md flex items-center justify-between shadow-sm">
-                    <Link href="/">
-                        <Image src="/Logo.png" height={40} width={100} alt="logo" className="h-8 w-auto" />
+                    <Link href="/" className="block">
+                        <Image
+                            src="/Logo.png"
+                            height={80}
+                            width={80}
+                            alt="logo"
+                            loading="eager"
+                            className="w-full h-auto"
+                        />
                     </Link>
                     <button onClick={() => setIsOpen(!isOpen)} className="text-black">
                         {isOpen ? <X size={28} /> : <Menu size={28} />}
