@@ -8,8 +8,8 @@ import { useRef, useState } from "react";
 import { motion } from "motion/react";
 import { useRouter } from "next/navigation";
 
-//  max file size  (5MB = 5 * 1024 * 1024 bytes)
-const MAX_FILE_SIZE = 5 * 1024 * 1024;
+//  max file size  (3MB = 3 * 1024 * 1024 bytes)
+const MAX_FILE_SIZE = 3 * 1024 * 1024;
 
 export default function Page() {
     const [name, setName] = useState("");
@@ -48,6 +48,7 @@ export default function Page() {
         try {
             const response = await fetch("/api/contact", {
                 method: "POST",
+                headers: { "Content-Type": "application/json" },
                 body: formData,
             });
 
@@ -256,8 +257,9 @@ export default function Page() {
 
                         <Group className="flex flex-col gap-2">
                             <Label className="text-xs sm:text-sm font-semibold text-gray-700">
-                                Attachment (Optional, max 5MB)
+                                Attachment (Optional, max 3MB)
                             </Label>
+
                             <input
                                 type="file"
                                 name="file"
@@ -271,7 +273,7 @@ export default function Page() {
 
                                         // Check File Size
                                         if (selectedFile.size > MAX_FILE_SIZE) {
-                                            setFileError("File is too large. Please select a file smaller than 5MB.");
+                                            setFileError("File is too large. Please select a file smaller than 4MB.");
                                             setFile(null);
                                             if (fileInputRef.current) {
                                                 fileInputRef.current.value = ""; // Clear the input
@@ -284,9 +286,32 @@ export default function Page() {
                                     }
                                 }}
                             />
+
                             {/* Display File Size Error */}
                             {fileError && (
                                 <p className="text-red-500 text-xs sm:text-sm mt-1">{fileError}</p>
+                            )}
+
+                            {/* Display selected file with a "Remove" button */}
+                            {file && !fileError && (
+                                <div className="flex items-center justify-between p-3 mt-1 bg-gray-50 border border-gray-200 rounded-xl text-sm">
+                                    <span className="truncate text-gray-700 font-medium max-w-[80%]">
+                                        {file.name}
+                                    </span>
+                                    <button
+                                        type="button"
+                                        onClick={() => {
+                                            setFile(null);
+                                            setFileError("");
+                                            if (fileInputRef.current) {
+                                                fileInputRef.current.value = ""; // Clear the actual input value
+                                            }
+                                        }}
+                                        className="text-red-500 hover:text-red-700 font-semibold px-2 transition-colors"
+                                    >
+                                        Remove
+                                    </button>
+                                </div>
                             )}
                         </Group>
 
