@@ -1,0 +1,74 @@
+/* Ultra-Premium Chatbot Styles */
+.b10-chatbot-root {
+  font-family: var(--font-inter), sans-serif;
+  color-scheme: dark;
+}
+
+.b10-chatbot-heading {
+  font-family: var(--font-cormorant), serif;
+}
+
+/* Premium Matte Neural Graph Background */
+.b10-chatbot-bg-pattern {
+  background-color: #09090B;
+  background-image: 
+    radial-gradient(circle at 15% 50%, rgba(255, 255, 255, 0.03) 0%, transparent 40%),
+    radial-gradient(circle at 85% 30%, rgba(255, 255, 255, 0.03) 0%, transparent 40%),
+    linear-gradient(rgba(255,255,255,0.015) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255,255,255,0.015) 1px, transparent 1px);
+  background-size: 100% 100%, 100% 100%, 24px 24px, 24px 24px;
+  background-position: 0 0, 0 0, -1px -1px, -1px -1px;
+}
+
+/* Scrollbar - Dark Theme Optimized */
+.b10-chatbot-root ::-webkit-scrollbar {
+  width: 4px;
+  height: 4px;
+}
+.b10-chatbot-root ::-webkit-scrollbar-track {
+  background: transparent;
+}
+.b10-chatbot-root ::-webkit-scrollbar-thumb {
+  background: rgba(255, 255, 255, 0.15);
+  border-radius: 10px;
+}
+.b10-chatbot-root ::-webkit-scrollbar-thumb:hover {
+  background: rgba(255, 255, 255, 0.3);
+}
+
+/* Instagram-style Animated Gradient Border */
+@keyframes b10-instagram-glow {
+  0% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
+}
+
+.animate-instagram-gradient {
+  /* Purple, Pink, Orange, Blue, Cyan */
+  background-image: linear-gradient(
+    90deg, 
+    #833AB4, 
+    #FD1D1D, 
+    #F58529, 
+    #38BDF8, 
+    #06B6D4, 
+    #833AB4
+  );
+  background-size: 300% 300%;
+  animation: b10-instagram-glow 22s linear infinite;
+}
+
+/* Dark Glass Bubbles */
+.b10-glass-bubble {
+  background: rgba(255, 255, 255, 0.03);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border: 1px solid rgba(255, 255, 255, 0.06);
+  box-shadow: 0 4px 24px rgba(0, 0, 0, 0.2);
+}
+
+/* Matte Solid Bubble */
+.b10-matte-bubble {
+  background: linear-gradient(135deg, #18181B 0%, #111827 100%);
+  border: 1px solid rgba(255, 255, 255, 0.04);
+}

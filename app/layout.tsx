@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import { Prata, Open_Sans, Courgette } from "next/font/google";
+import { ChatbotWidget } from "@chatbot/components/ChatbotWidget";
 import "./globals.css";
 
 // 💡 Quick bug fix: Changed courgette's variable to '--font-courgette' 
@@ -91,7 +92,11 @@ export default function RootLayout({
       lang="en"
       className={`${prata.variable} ${openSans.variable} ${courgette.variable} h-full antialiased`}
     >
-      <body className="min-h-full flex flex-col">{children}</body>
+      <body className="min-h-full flex flex-col">
+        {children}
+        {/* Chatbot MUST always be the last element */}
+        <ChatbotWidget />
+      </body>
     </html>
   );
 }
