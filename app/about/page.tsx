@@ -124,6 +124,7 @@ export default function Page() {
 
                             {/* FIXED: min-h-75 to min-h-[300px] */}
                             <div className="relative min-h-75 w-full rounded-3xl border border-neutral-200 bg-neutral-50 overflow-hidden order-4 lg:order-3">
+                                {/* eslint-disable-next-line @next/next/no-img-element */}
                                 <img
                                     src="https://images.unsplash.com/photo-1522071820081-009f0129c71c?auto=format&fit=crop&q=80&w=800"
                                     alt="Team collaborating"

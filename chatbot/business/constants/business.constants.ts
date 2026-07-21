@@ -1,0 +1,7 @@
+export enum BusinessStatus {
+  IDLE = "IDLE",
+  INITIALIZING = "INITIALIZING",
+  READY = "READY",
+  PARTIAL_READY = "PARTIAL_READY",
+  ERROR = "ERROR"
+}

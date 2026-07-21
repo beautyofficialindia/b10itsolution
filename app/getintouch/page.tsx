@@ -37,28 +37,41 @@ export default function Page() {
 
         // Switch to FormData to handle file uploads
         const formData = new FormData();
-        formData.append("name", name);
+        formData.append("full_name", name);
         formData.append("email", email);
-        formData.append("number", number);
+        formData.append("phone_number", number);
         formData.append("message", message);
         if (file) {
-            formData.append("file", file);
+            formData.append("attachment", file);
         }
 
         try {
-            const response = await fetch("/api/contact", {
+            const response = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/api/v1/public/contact/`, {
                 method: "POST",
                 headers: { "Content-Type": "application/json" },
                 body: formData,
             });
 
-            const data = await response.json();
+            const data = await response.json().catch(() => null);
 
             if (!response.ok) {
-                throw new Error(data.error || "Something went wrong.");
+                let errorMessage = "Oops! Something went wrong. We couldn't submit your request at the moment. Please try again in a few moments.";
+                if (data) {
+                    if (data.detail) errorMessage = data.detail;
+                    else if (data.message) errorMessage = data.message;
+                    else if (data.error) errorMessage = data.error;
+                    else if (typeof data === 'object') {
+                        // Extract first validation error from DRF style dict
+                        const firstKey = Object.keys(data)[0];
+                        if (firstKey && Array.isArray(data[firstKey])) {
+                            errorMessage = `${data[firstKey][0]}`;
+                        } else if (firstKey && typeof data[firstKey] === 'string') {
+                            errorMessage = data[firstKey];
+                        }
+                    }
+                }
+                throw new Error(errorMessage);
             }
-
-
 
             setShowModal(true); // Trigger the success modal instead of just setting the inline status
             // Reset input values
@@ -73,7 +86,7 @@ export default function Page() {
 
             // eslint-disable-next-line @typescript-eslint/no-explicit-any
         } catch (err: any) {
-            setStatus({ type: "error", message: err.message || "Failed to send message." });
+            setStatus({ type: "error", message: err.message || "Oops! Something went wrong. We couldn't submit your request at the moment. Please try again in a few moments." });
         } finally {
             setIsSubmitting(false);
         }
@@ -368,7 +381,8 @@ export default function Page() {
 
                         <h3 className="text-2xl font-bold text-gray-900 mb-2 font-prata">Thank You!</h3>
                         <p className="text-gray-600 mb-8 font-open-sans">
-                            Your message has been received. We will get back to you shortly.
+                            We have received your request successfully.<br /><br />
+                            Our team will review your requirements and get in touch with you shortly.
                         </p>
 
                         <button
