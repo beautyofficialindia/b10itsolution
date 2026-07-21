@@ -2,8 +2,6 @@ import type { Metadata } from "next";
 import { Prata, Open_Sans, Courgette } from "next/font/google";
 import "./globals.css";
 
-// 💡 Quick bug fix: Changed courgette's variable to '--font-courgette' 
-// so it doesn't overwrite '--font-prata'
 const prata = Prata({
   weight: '400',
   subsets: ['latin'],
@@ -26,7 +24,7 @@ const openSans = Open_Sans({
 
 
 export const metadata: Metadata = {
-  metadataBase: new URL("https://b10itsolution.com"), // Replace with your production domain
+  metadataBase: new URL("https://b10itsolution.vercel.app"), // Replace with your production domain
   title: {
     default: "B10 IT Solution | Enterprise Software & AI Agent Development",
     template: "%s | B10 IT Solution",
@@ -60,7 +58,7 @@ export const metadata: Metadata = {
   openGraph: {
     type: "website",
     locale: "en_US",
-    url: "https://b10itsolution.com",
+    url: "https://b10itsolution.vercel.app",
     title: "B10 IT Solution | Custom Software & AI Solutions",
     description: "Transforming ideas into robust digital products. Specializing in Web Apps, Mobile Apps, and AI-driven automation.",
     siteName: "B10 IT Solution",

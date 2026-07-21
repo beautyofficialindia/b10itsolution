@@ -41,7 +41,7 @@ export const Product = () => {
         >
 
             <div className="bg-[#ff9900] text-white text-sm font-semibold px-4 py-2 rounded-xl rounded-tl-none shadow-sm">
-                Product Dev
+                Mobile App
             </div>
             <CursorArrow className="text-black -mt-1 ml-1 scale-x-[-1]" />
         </motion.div>
@@ -60,7 +60,7 @@ export const Appdesign = () => {
             className="flex absolute top-[42%] right-5  flex-col items-start z-60 select-none"
         >
             <div className="bg-[#ccff00] text-zinc-900 text-sm font-semibold px-4 py-2 rounded-xl rounded-tl-none shadow-sm">
-                Product dev
+                Mobile App
             </div>
             <CursorArrow className="text-black -mt-1 ml-1 scale-x-[-1]" />
         </motion.div>

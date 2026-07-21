@@ -10,7 +10,7 @@ export default function Page() {
     return (
         <>
             <Appbar />
-            <main className="w-full min-h-screen">
+            <main className="w-full min-h-screen mt-10 md:mt-2">
                 <div
                     className="absolute inset-0 opacity-[0.05] pointer-events-none -z-10"
                     style={{
@@ -65,10 +65,10 @@ export default function Page() {
 
                         {/* Outer Glow / Gradient (Softened for white theme) */}
                         <div
-                            className="absolute -top-[20%] -right-[10%] w-[50%] h-[50%] blur-[120px] opacity-5 rounded-full pointer-events-none bg-[#6c63fa]"
+                            className="absolute top-[-20%] right-[-10%] w-[50%] h-[50%] blur-[120px] opacity-5 rounded-full pointer-events-none bg-[#6c63fa]"
                         />
                         <div
-                            className="absolute -bottom-[20%] -left-[10%] w-[50%] h-[50%] blur-[120px] opacity-5 rounded-full pointer-events-none bg-[#6c63fa]"
+                            className="absolute bottom-[-20%] left-[-10%] w-[50%] h-[50%] blur-[120px] opacity-5 rounded-full pointer-events-none bg-[#6c63fa]"
                         />
 
                         {/* Grid Layout */}
@@ -92,11 +92,10 @@ export default function Page() {
                                     fill
                                     className="absolute inset-0 w-full h-full object-cover"
                                 />
-                                {/* FIXED: bg-linear-to-t to bg-gradient-to-t */}
+                                
                                 <div className="absolute inset-0 bg-linear-to-t from-neutral-100/60 to-transparent"></div>
                             </div>
 
-                            {/* FIXED: min-h-75 to min-h-[300px] */}
                             <div className="relative min-h-75 w-full rounded-3xl border border-neutral-200 bg-neutral-50 overflow-hidden order-4 lg:order-3">
                                 <Image
                                     src="/service2.png"

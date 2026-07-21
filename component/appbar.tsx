@@ -125,7 +125,7 @@ export default function Page() {
                             initial={{ opacity: 0, y: -20 }}
                             animate={{ opacity: 1, y: 0 }}
                             exit={{ opacity: 0, y: -20 }}
-                            className="md:hidden fixed inset-x-0 top-17.5 z-50 mx-4 flex flex-col rounded-xl bg-white/95 backdrop-blur-md px-6 py-6 shadow-lg border border-neutral-100"
+                            className="md:hidden fixed inset-x-0 top-25 z-50 mx-4 flex flex-col rounded-xl bg-white/95 backdrop-blur-md px-6 py-6 shadow-lg border border-neutral-100"
                         >
                             <ul className="flex flex-col space-y-6">
                                 {navItems.map((item) => (

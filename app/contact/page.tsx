@@ -15,7 +15,7 @@ export default function Page() {
             <section className="grow w-full max-w-6xl px-4 sm:px-6 lg:px-8 mx-auto mt-16 sm:mt-24 md:mt-32 mb-16 sm:mb-24 grid grid-cols-1 md:grid-cols-2 gap-12 lg:gap-20 items-start">
 
                 {/* Left Column: Get in Touch Info */}
-                <div className="flex flex-col items-start md:p-4 w-full mt-5">
+                <div className="flex flex-col items-start md:p-4 w-full mt-10 md:mt-2">
                     {/* Header Section */}
                     <div className="flex flex-col">
                         <h1 className="text-3xl sm:text-4xl md:text-5xl font-bold tracking-widest text-[#6c63fa] font-prata uppercase">
