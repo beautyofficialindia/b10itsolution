@@ -7,9 +7,37 @@ import { Label } from "@/component/Utility/Label";
 import { useRef, useState } from "react";
 import { motion } from "motion/react";
 import { useRouter } from "next/navigation";
+import { z } from "zod";
 
-//  max file size  (3MB = 3 * 1024 * 1024 bytes)
-const MAX_FILE_SIZE = 3 * 1024 * 1024;
+//  max file size  (10MB = 10 * 1024 * 1024 bytes)
+const MAX_FILE_SIZE = 10 * 1024 * 1024;
+
+// accepted file format
+const ACCEPTED_FILE_TYPES = [
+    "image/jpeg",
+    "image/jpg",
+    "image/png",
+    "application/pdf"
+];
+
+const fileSchema = z.any().optional().nullable().refine(
+    (file) => !file || file.size <= MAX_FILE_SIZE,
+    "File size is too large. Please select a file smaller than 10MB"
+).refine(
+    (file) => !file || ACCEPTED_FILE_TYPES.includes(file.type),
+    "Only .png, .jpg, .jpeg, and .pdf formats are supported."
+)
+
+// zod schema for form validation
+const contactSchema = z.object({
+    name: z.string().min(2, "Name must be at least 2 characters."),
+    email: z.string().email("Please enter a valid email address."),
+    number: z.string()
+        .min(10, "Contact number must be at least 10 digits.")
+        .regex(/^[0-9+\-\s()]*$/, "Invalid contact number format."),
+    message: z.string().min(10, "Message must be at least 10 characters long."),
+    file: fileSchema
+});
 
 export default function Page() {
     const [name, setName] = useState("");
@@ -20,7 +48,7 @@ export default function Page() {
     const [status, setStatus] = useState({ type: "", message: "" });
     const [showModal, setShowModal] = useState(false);
     const [file, setFile] = useState<File | null>(null);
-    const [fileError, setFileError] = useState("");
+    const [errors, setErrors] = useState<Record<string, string>>({});
 
     const router = useRouter();
     const fileInputRef = useRef<HTMLInputElement>(null);
@@ -28,10 +56,25 @@ export default function Page() {
 
     const handleSubmit = async (e: React.FormEvent) => {
         e.preventDefault();
+        // Validate form data using Zod
+        const validation = contactSchema.safeParse({ name, email, number, message, file });
 
-        // return if any file error happened
-        if (fileError) return;
+        if (!validation.success) {
+            const fieldErrors: Record<string, string> = {};
+            validation.error.issues.forEach(issue => {
+                if (issue.path.length > 0) {
+                    const key = String(issue.path[0]);
+                    fieldErrors[key] = issue.message;
+                }
+            });
+            setErrors(fieldErrors);
+            return;
+        }
 
+        // Clear previous errors
+        setErrors({});
+        setIsSubmitting(true);
+        setStatus({ type: "", message: "" });
         setIsSubmitting(true);
         setStatus({ type: "", message: "" });
 
@@ -199,7 +242,7 @@ export default function Page() {
                         </h2>
                     </div>
 
-                    <form onSubmit={handleSubmit} className="grid grid-cols-1 gap-5 sm:gap-6 font-open-sans">
+                    <form onSubmit={handleSubmit} className="grid grid-cols-1 gap-5 sm:gap-6 font-open-sans" noValidate>
                         <Group className="flex flex-col gap-2">
                             <Label className="text-xs sm:text-sm font-semibold text-gray-700 after:content-['*'] after:ml-0.5 after:text-red-500">
                                 Full Name
@@ -208,13 +251,14 @@ export default function Page() {
                                 type="text"
                                 name="name"
                                 value={name}
-                                placeholder="Enter your name"
-                                className="w-full px-4 py-3 sm:py-4 bg-white border border-gray-300 rounded-xl shadow-sm placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-[#28288d]/50 focus:border-[#28288d] transition-all text-sm sm:text-base"
-                                required
+                                placeholder="John doe"
+                                className={`w-full px-4 py-3 sm:py-4 bg-white border rounded-xl shadow-sm placeholder-gray-400 focus:outline-none focus:ring-2 transition-all text-sm sm:text-base ${errors.name ? 'border-red-500 focus:ring-red-500/50 focus:border-red-500' : 'border-gray-300 focus:ring-[#28288d]/50 focus:border-[#28288d]'}`}
                                 onChange={(e) => {
-                                    setName(e.target.value)
+                                    setName(e.target.value);
+                                    if (errors.name) setErrors(prev => ({ ...prev, name: "" }));
                                 }}
                             />
+                            {errors.name && <p className="text-red-500 text-xs sm:text-sm mt-1">{errors.name}</p>}
                         </Group>
 
                         <Group className="flex flex-col gap-2">
@@ -225,13 +269,14 @@ export default function Page() {
                                 type="email"
                                 name="email"
                                 value={email}
-                                placeholder="Enter your email"
-                                className="w-full px-4 py-3 sm:py-4 bg-white border border-gray-300 rounded-xl shadow-sm placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-[#28288d]/50 focus:border-[#28288d] transition-all text-sm sm:text-base"
-                                required
+                                placeholder="example@email.com"
+                                className={`w-full px-4 py-3 sm:py-4 bg-white border rounded-xl shadow-sm placeholder-gray-400 focus:outline-none focus:ring-2 transition-all text-sm sm:text-base ${errors.email ? 'border-red-500 focus:ring-red-500/50 focus:border-red-500' : 'border-gray-300 focus:ring-[#28288d]/50 focus:border-[#28288d]'}`}
                                 onChange={(e) => {
-                                    setEmail(e.target.value)
+                                    setEmail(e.target.value);
+                                    if (errors.email) setErrors(prev => ({ ...prev, email: "" }));
                                 }}
                             />
+                            {errors.email && <p className="text-red-500 text-xs sm:text-sm mt-1">{errors.email}</p>}
                         </Group>
 
                         <Group className="flex flex-col gap-2">
@@ -242,13 +287,14 @@ export default function Page() {
                                 type="text"
                                 name="number"
                                 value={number}
-                                placeholder="Enter your contact number"
-                                className="w-full px-4 py-3 sm:py-4 bg-white border border-gray-300 rounded-xl shadow-sm placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-[#28288d]/50 focus:border-[#28288d] transition-all text-sm sm:text-base"
-                                required
+                                placeholder="+91 1234567890"
+                                className={`w-full px-4 py-3 sm:py-4 bg-white border rounded-xl shadow-sm placeholder-gray-400 focus:outline-none focus:ring-2 transition-all text-sm sm:text-base ${errors.number ? 'border-red-500 focus:ring-red-500/50 focus:border-red-500' : 'border-gray-300 focus:ring-[#28288d]/50 focus:border-[#28288d]'}`}
                                 onChange={(e) => {
-                                    setNumber(e.target.value)
+                                    setNumber(e.target.value);
+                                    if (errors.number) setErrors(prev => ({ ...prev, number: "" }));
                                 }}
                             />
+                            {errors.number && <p className="text-red-500 text-xs sm:text-sm mt-1">{errors.number}</p>}
                         </Group>
 
                         <Group className="flex flex-col gap-2">
@@ -259,34 +305,39 @@ export default function Page() {
                                 name="message"
                                 placeholder="Write briefly about your work"
                                 value={message}
-                                required
                                 rows={4}
-                                className="w-full px-4 py-3 sm:py-4 bg-white border border-gray-300 rounded-xl shadow-sm placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-[#28288d]/50 focus:border-[#28288d] transition-all resize-none text-sm sm:text-base"
+                                className={`w-full px-4 py-3 sm:py-4 bg-white border rounded-xl shadow-sm placeholder-gray-400 focus:outline-none focus:ring-2 transition-all resize-none text-sm sm:text-base ${errors.message ? 'border-red-500 focus:ring-red-500/50 focus:border-red-500' : 'border-gray-300 focus:ring-[#28288d]/50 focus:border-[#28288d]'}`}
                                 onChange={(e) => {
-                                    setMessage(e.target.value)
+                                    setMessage(e.target.value);
+                                    if (errors.message) setErrors(prev => ({ ...prev, message: "" }));
                                 }}
                             />
+                            {errors.message && <p className="text-red-500 text-xs sm:text-sm mt-1">{errors.message}</p>}
                         </Group>
 
                         <Group className="flex flex-col gap-2">
                             <Label className="text-xs sm:text-sm font-semibold text-gray-700">
-                                Attachment (Optional, max 3MB)
+                                Attachment (Optional, max 10MB, PDF/JPG/PNG)
                             </Label>
 
                             <input
                                 type="file"
                                 name="file"
                                 ref={fileInputRef}
-                                className={`w-full px-4 py-3 bg-white border ${fileError ? 'border-red-500 focus:ring-red-500/50 focus:border-red-500' : 'border-gray-300 focus:ring-[#28288d]/50 focus:border-[#28288d]'} rounded-xl shadow-sm focus:outline-none focus:ring-2 transition-all text-sm sm:text-base file:mr-4 file:py-2 file:px-4 file:rounded-full file:border-0 file:text-sm file:font-semibold file:bg-[#28288d]/10 file:text-[#28288d] hover:file:bg-[#28288d]/20 cursor-pointer`}
+                                accept=".png,.jpg,.jpeg,.pdf"
+                                className={`w-full px-4 py-3 bg-white border ${errors.file ? 'border-red-500 focus:ring-red-500/50 focus:border-red-500' : 'border-gray-300 focus:ring-[#28288d]/50 focus:border-[#28288d]'} rounded-xl shadow-sm focus:outline-none focus:ring-2 transition-all text-sm sm:text-base file:mr-4 file:py-2 file:px-4 file:rounded-full file:border-0 file:text-sm file:font-semibold file:bg-[#28288d]/10 file:text-[#28288d] hover:file:bg-[#28288d]/20 cursor-pointer`}
                                 onChange={(e) => {
-                                    setFileError(""); // Reset error on new selection
+                                    // Reset specific file error on new selection
+                                    if (errors.file) setErrors((prev) => ({ ...prev, file: "" }));
 
                                     if (e.target.files && e.target.files[0]) {
                                         const selectedFile = e.target.files[0];
 
-                                        // Check File Size
-                                        if (selectedFile.size > MAX_FILE_SIZE) {
-                                            setFileError("File is too large. Please select a file smaller than 4MB.");
+                                        // Trigger Zod validation early for immediate feedback
+                                        const fileValidation = fileSchema.safeParse(selectedFile);
+
+                                        if (!fileValidation.success) {
+                                            setErrors((prev) => ({ ...prev, file: fileValidation.error.issues[0].message }));
                                             setFile(null);
                                             if (fileInputRef.current) {
                                                 fileInputRef.current.value = ""; // Clear the input
@@ -300,13 +351,13 @@ export default function Page() {
                                 }}
                             />
 
-                            {/* Display File Size Error */}
-                            {fileError && (
-                                <p className="text-red-500 text-xs sm:text-sm mt-1">{fileError}</p>
+                            {/* Display File Size/Type Error */}
+                            {errors.file && (
+                                <p className="text-red-500 text-xs sm:text-sm mt-1">{errors.file}</p>
                             )}
 
                             {/* Display selected file with a "Remove" button */}
-                            {file && !fileError && (
+                            {file && !errors.file && (
                                 <div className="flex items-center justify-between p-3 mt-1 bg-gray-50 border border-gray-200 rounded-xl text-sm">
                                     <span className="truncate text-gray-700 font-medium max-w-[80%]">
                                         {file.name}
@@ -315,7 +366,7 @@ export default function Page() {
                                         type="button"
                                         onClick={() => {
                                             setFile(null);
-                                            setFileError("");
+                                            setErrors((prev) => ({ ...prev, file: "" }));
                                             if (fileInputRef.current) {
                                                 fileInputRef.current.value = ""; // Clear the actual input value
                                             }

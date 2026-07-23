@@ -18,7 +18,7 @@ export const AIMessage: React.FC<{ content: string }> = ({ content }) => {
         </div>
         <span className="text-[12px] font-semibold text-[#A1A1AA]">B10 AI Assistant</span>
       </div>
-      <div className="max-w-[75%] b10-glass-bubble rounded-2xl rounded-tl-sm px-5 py-4 text-[15px] leading-relaxed text-white/90 break-words whitespace-pre-wrap">
+      <div className="max-w-[75%] b10-glass-bubble rounded-2xl rounded-tl-sm px-5 py-4 text-[15px] leading-relaxed text-white/90 wrap-break-word whitespace-pre-wrap">
         {content}
       </div>
     </motion.div>

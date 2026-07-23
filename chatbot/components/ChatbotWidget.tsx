@@ -46,7 +46,7 @@ export const ChatbotWidget: React.FC = () => {
       <SessionProvider>
         <BusinessContextProvider>
           <KnowledgeProvider>
-            <div className={`b10-chatbot-root ${chatbotFonts.variables} pointer-events-none fixed inset-0 z-[9999]`}>
+            <div className={`b10-chatbot-root ${chatbotFonts.variables} pointer-events-none fixed inset-0 z-9999`}>
               <ChatWindow isOpen={isOpen} close={() => setIsOpen(false)} />
               <ChatLauncher isOpen={isOpen} toggle={() => setIsOpen(!isOpen)} />
             </div>
