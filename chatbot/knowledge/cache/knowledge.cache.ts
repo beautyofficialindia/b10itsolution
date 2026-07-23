@@ -5,8 +5,8 @@ class KnowledgeCacheStore {
     this.store = new Map();
   }
 
-  get(key: string): unknown {
-    return this.store.get(key);
+  get<T>(key: string): T | undefined {
+    return this.store.get(key) as T | undefined;
   }
 
   set(key: string, value: unknown) {

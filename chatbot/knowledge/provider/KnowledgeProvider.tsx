@@ -18,9 +18,11 @@ export const KnowledgeProvider: React.FC<{ children: ReactNode }> = ({ children 
     
     // 1. Cache Hit
     if (knowledgeCache.has(cacheKey)) {
-      const cached = knowledgeCache.get(cacheKey);
-      setEntries(cached.data);
-      setPagination(cached.pagination);
+      const cached = knowledgeCache.get<{ data: KBEntrySummary[]; pagination: KBPagination }>(cacheKey);
+      if (cached) {
+        setEntries(cached.data);
+        setPagination(cached.pagination);
+      }
       setStatus(KnowledgeStatus.READY);
       return;
     }
@@ -48,7 +50,10 @@ export const KnowledgeProvider: React.FC<{ children: ReactNode }> = ({ children 
     
     // 1. Cache Hit
     if (knowledgeCache.has(cacheKey)) {
-      setActiveEntry(knowledgeCache.get(cacheKey));
+      const cached = knowledgeCache.get<KBEntryDetail>(cacheKey);
+      if (cached) {
+        setActiveEntry(cached);
+      }
       setStatus(KnowledgeStatus.READY);
       return;
     }
