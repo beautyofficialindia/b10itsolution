@@ -25,7 +25,7 @@ export default function Footer() {
                                 alt="B10IT Solution Logo"
                                 width={140}
                                 height={54}
-                                className="object-contain h-auto"
+                                className="w-auto h-auto object-contain"
                             />
                         </Link>
                         <p className="mt-8 text-lg text-zinc-200 font-light leading-relaxed max-w-sm">
@@ -112,7 +112,7 @@ export default function Footer() {
                     </div>
 
                     {/* Socials */}
-                    <div className="flex items-center gap-5 text-zinc-200 order-1 md:order-3">
+                    <div className="flex items-center gap-5 text-zinc-200 order-1 md:order-3 md:mr-10">
                         {/* <a href="#" aria-label="Twitter / X" className="hover:-translate-y-0.5 transition-all duration-200">
                             <BsTwitterX className="w-4.5 h-4.5" />
                         </a> */}

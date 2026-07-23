@@ -1,6 +1,6 @@
 "use client";
 import { motion } from "framer-motion";
-import { Appdesign, Design, Product, Web } from "./floting";
+import { Product, Web } from "./floting";
 
 export default function AnimatedProgrammingSVG() {
   const lineVariants = {
@@ -23,8 +23,6 @@ export default function AnimatedProgrammingSVG() {
     
       <Web />
       <Product />
-      {/* <Appdesign />
-      <Design /> */}
       <svg
         xmlns="http://www.w3.org/2000/svg"
         viewBox="0 0 1000 1000"
