@@ -19,7 +19,7 @@ export const Web = () => {
             // Changed positioning to top-left
             className="absolute top-[0%] left-[5%] flex flex-col items-start z-60 select-none"
         >
-            <div className="bg-[#5c4aff] text-white text-sm font-medium px-4 py-2 rounded-xl rounded-bl-none shadow-sm">
+            <div className="bg-[#5c4aff] text-white text-sm font-medium px-4 py-2 rounded-xl rounded-br-none shadow-sm">
                 Web Design
             </div>
             <CursorArrow className="text-black -mt-1 ml-1" />

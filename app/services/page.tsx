@@ -42,7 +42,7 @@ export default function Page() {
                             <p className="mx-auto max-w-2xl px-2 sm:px-0 text-center text-base sm:text-lg md:text-xl text-neutral-500 mt-3 md:mt-4 font-open-sans">
                                 Discover how B10 IT services and solutions can help your enterprise turn digital challenges into business success.
                             </p>
-               
+
                             <div className="mt-6 md:mt-8 w-full max-w-4xl mx-auto overflow-hidden">
                                 <Marquee />
                             </div>
@@ -90,9 +90,10 @@ export default function Page() {
                                     src="/service1.png"
                                     alt="services"
                                     fill
+                                    sizes="(max-width: 768px) 100vw, 400px"
                                     className="absolute inset-0 w-full h-full object-cover"
                                 />
-                                
+
                                 <div className="absolute inset-0 bg-linear-to-t from-neutral-100/60 to-transparent"></div>
                             </div>
 
@@ -101,6 +102,7 @@ export default function Page() {
                                     src="/service2.png"
                                     alt="services"
                                     fill
+                                    sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
                                     className="absolute inset-0 w-full h-full object-cover"
                                 />
                                 <div className="absolute inset-0 bg-linear-to-t from-neutral-100/60 to-transparent"></div>
@@ -130,6 +132,7 @@ export default function Page() {
                                     src="/service3.png"
                                     alt="services"
                                     fill
+                                    sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
                                     className="absolute inset-0 w-full h-full object-cover"
                                 />
                                 <div className="absolute inset-0 bg-linear-to-t from-neutral-100/60 to-transparent"></div>
