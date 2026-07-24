@@ -91,7 +91,6 @@ export default function Page() {
         try {
             const response = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/api/v1/public/contact/`, {
                 method: "POST",
-                headers: { "Content-Type": "application/json" },
                 body: formData,
             });
 
